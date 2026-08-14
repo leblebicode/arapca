@@ -1,0 +1,50 @@
+@if (lesson(); as lesson) {
+  <main class="page">
+    <header class="bar">
+      <a [routerLink]="['/lesson', lesson.id]">{{ lesson.title }}</a>
+      <p>{{ learnedCount() }}/{{ total() }}</p>
+    </header>
+
+    <app-study-tabs [lessonId]="lesson.id" />
+
+    @for (item of visible(); track item.id) {
+      <button class="stage" type="button" (click)="flip()" [attr.aria-pressed]="flipped()">
+        <span class="hint">{{ flipped() ? 'Cevap' : 'Soru' }} · dokun, çevir</span>
+        <span class="card" [class.flipped]="flipped()">
+          <span class="inner">
+            <span
+              class="face front"
+              [attr.lang]="settings.promptIsArabic() ? 'ar' : 'tr'"
+              [attr.dir]="settings.promptIsArabic() ? 'rtl' : 'ltr'"
+            >
+              {{ settings.prompt(item) }}
+            </span>
+            <span
+              class="face back"
+              [attr.lang]="settings.answerIsArabic() ? 'ar' : 'tr'"
+              [attr.dir]="settings.answerIsArabic() ? 'rtl' : 'ltr'"
+            >
+              {{ settings.answer(item) }}
+            </span>
+          </span>
+        </span>
+      </button>
+
+      <div class="actions">
+        <button type="button" class="again" (click)="again()">Tekrar et</button>
+        <button type="button" class="done" (click)="learned()">Öğrendim</button>
+      </div>
+    } @empty {
+      <section class="done-state">
+        <h1>Bu dersteki kartlar bitti</h1>
+        <p>İstersen kuyruğu sıfırlayıp yeniden başla.</p>
+        <button type="button" class="done" (click)="restart()">Yeniden başla</button>
+      </section>
+    }
+  </main>
+} @else {
+  <main class="page">
+    <p>Ders bulunamadı.</p>
+    <a routerLink="/">Derslere dön</a>
+  </main>
+}

@@ -1,0 +1,84 @@
+@if (lesson(); as lesson) {
+  <main class="page">
+    <a class="back" routerLink="/">Dersler</a>
+
+    <header class="head">
+      <h1>{{ lesson.title }}</h1>
+      <p>
+        {{ lesson.vocabulary.length }} kelime · {{ lesson.sentences.length }} cümle · yönü seç,
+        ardından sekmeden çalışma biçimini seç
+      </p>
+    </header>
+
+    <div class="direction" role="group" aria-label="Kart yönü">
+      <button
+        type="button"
+        [class.active]="settings.direction() === 'tr-ar'"
+        (click)="setDirection('tr-ar')"
+      >
+        Türkçe → Arapça
+      </button>
+      <button
+        type="button"
+        [class.active]="settings.direction() === 'ar-tr'"
+        (click)="setDirection('ar-tr')"
+      >
+        Arapça → Türkçe
+      </button>
+    </div>
+
+    <app-study-tabs [lessonId]="lesson.id" />
+
+    <div class="modes" aria-label="Mod özeti">
+      <div class="mode-row">
+        <a [routerLink]="['/lesson', lesson.id, 'flashcard']">
+          <span class="mode-name">Flashcard</span>
+          <span class="mode-copy">Kartı çevir, hatırla</span>
+          <span class="mode-meta">{{ flashLearned() }}/{{ lesson.vocabulary.length }} öğrenildi</span>
+        </a>
+        @if (flashLearned() > 0) {
+          <button type="button" class="reset" (click)="resetMode('flashcard')">Sıfırla</button>
+        }
+      </div>
+
+      <div class="mode-row">
+        <a [routerLink]="['/lesson', lesson.id, 'input']">
+          <span class="mode-name">Yazarak çalış</span>
+          <span class="mode-copy">Kelime cevabını kendin yaz</span>
+          <span class="mode-meta">{{ inputLearned() }}/{{ lesson.vocabulary.length }} öğrenildi</span>
+        </a>
+        @if (inputLearned() > 0) {
+          <button type="button" class="reset" (click)="resetMode('input')">Sıfırla</button>
+        }
+      </div>
+
+      <div class="mode-row">
+        <a [routerLink]="['/lesson', lesson.id, 'sentences']">
+          <span class="mode-name">Cümleler</span>
+          <span class="mode-copy">Cümleyi yaz, kontrol et</span>
+          <span class="mode-meta">{{ sentenceLearned() }}/{{ lesson.sentences.length }} öğrenildi</span>
+        </a>
+        @if (sentenceLearned() > 0) {
+          <button type="button" class="reset" (click)="resetMode('sentences')">Sıfırla</button>
+        }
+      </div>
+
+      <div class="mode-row">
+        <a [routerLink]="['/lesson', lesson.id, 'list']">
+          <span class="mode-name">Liste</span>
+          <span class="mode-copy">Tüm kelimeleri tek sayfada gör</span>
+          <span class="mode-meta">{{ lesson.vocabulary.length }} kelime</span>
+        </a>
+      </div>
+    </div>
+
+    @if (hasAnyProgress()) {
+      <button type="button" class="reset-all" (click)="resetAll()">Tüm ilerlemeyi sıfırla</button>
+    }
+  </main>
+} @else {
+  <main class="page">
+    <p>Ders bulunamadı.</p>
+    <a class="back" routerLink="/">Derslere dön</a>
+  </main>
+}

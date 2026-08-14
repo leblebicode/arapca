@@ -1,0 +1,19 @@
+<main class="page">
+  <header class="brand">
+    <p class="brand-kicker">1. Cilt</p>
+    <h1 class="brand-name">Durûsu'l-Luğati'l-Arabiyye</h1>
+    <p class="brand-line">Ders seç, çalışmaya başla.</p>
+  </header>
+
+  <nav class="lessons" aria-label="Dersler">
+    @for (lesson of lessons; track lesson.id) {
+      <a class="lesson" [routerLink]="['/lesson', lesson.id]">
+        <span class="lesson-index">{{ lesson.id }}</span>
+        <span class="lesson-title">{{ lesson.title }}</span>
+        <span class="lesson-meta"
+          >{{ lesson.vocabulary.length }} kelime · {{ lesson.sentences.length }} cümle</span
+        >
+      </a>
+    }
+  </nav>
+</main>

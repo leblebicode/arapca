@@ -1,0 +1,74 @@
+@if (lesson(); as lesson) {
+  <main class="page">
+    <header class="bar">
+      <a [routerLink]="['/lesson', lesson.id]">{{ lesson.title }} · Cümleler</a>
+      <p>{{ learnedCount() }}/{{ total() }}</p>
+    </header>
+
+    <app-study-tabs [lessonId]="lesson.id" />
+
+    @if (current(); as item) {
+      <section class="prompt">
+        <p class="hint">{{ settings.promptIsArabic() ? 'Arapça cümle' : 'Türkçe cümle' }}</p>
+        <p
+          class="question"
+          [attr.lang]="settings.promptIsArabic() ? 'ar' : 'tr'"
+          [attr.dir]="settings.promptIsArabic() ? 'rtl' : 'ltr'"
+        >
+          {{ settings.prompt(item) }}
+        </p>
+      </section>
+
+      <form class="answer" (submit)="$event.preventDefault(); checked() ? continueAfterCheck() : check()">
+        <label for="answer">{{ settings.answerIsArabic() ? 'Arapça karşılık' : 'Türkçe karşılık' }}</label>
+        <input
+          id="answer"
+          [value]="draft()"
+          [attr.lang]="settings.answerIsArabic() ? 'ar' : 'tr'"
+          [attr.dir]="settings.answerIsArabic() ? 'rtl' : 'ltr'"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          [disabled]="checked()"
+          (input)="onInput($event)"
+        />
+
+        @if (checked()) {
+          <p class="result" [class.ok]="correct()" [class.no]="!correct()">
+            @if (correct()) {
+              Doğru
+            } @else {
+              Doğru cevap:
+              <span
+                [attr.lang]="settings.answerIsArabic() ? 'ar' : 'tr'"
+                [attr.dir]="settings.answerIsArabic() ? 'rtl' : 'ltr'"
+              >
+                {{ settings.answer(item) }}
+              </span>
+            }
+          </p>
+        }
+
+        <div class="actions">
+          @if (!checked()) {
+            <button type="submit" class="check">Kontrol et</button>
+          } @else {
+            <button type="button" class="again" (click)="again()">Tekrar et</button>
+            <button type="button" class="done" (click)="learned()">Öğrendim</button>
+          }
+        </div>
+      </form>
+    } @else {
+      <section class="done-state">
+        <h1>Bu dersteki cümleler bitti</h1>
+        <p>İstersen kuyruğu sıfırlayıp yeniden başla.</p>
+        <button type="button" class="done" (click)="restart()">Yeniden başla</button>
+      </section>
+    }
+  </main>
+} @else {
+  <main class="page">
+    <p>Ders bulunamadı.</p>
+    <a routerLink="/">Derslere dön</a>
+  </main>
+}

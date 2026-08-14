@@ -1,0 +1,24 @@
+@if (lesson(); as lesson) {
+  <main class="page">
+    <header class="bar">
+      <a [routerLink]="['/lesson', lesson.id]">{{ lesson.title }}</a>
+      <p>{{ lesson.vocabulary.length }} kelime</p>
+    </header>
+
+    <app-study-tabs [lessonId]="lesson.id" />
+
+    <ul class="words">
+      @for (item of lesson.vocabulary; track item.id) {
+        <li>
+          <span class="ar" lang="ar" dir="rtl">{{ item.arabic }}</span>
+          <span class="tr">{{ item.meaning }}</span>
+        </li>
+      }
+    </ul>
+  </main>
+} @else {
+  <main class="page">
+    <p>Ders bulunamadı.</p>
+    <a routerLink="/">Derslere dön</a>
+  </main>
+}

@@ -1,0 +1,55 @@
+:root {
+  --ink: #13241f;
+  --ink-soft: #4a635b;
+  --mist: #f3efe5;
+  --line: color-mix(in srgb, var(--ink) 14%, transparent);
+  --teal: #1f6b5c;
+  --teal-deep: #123f36;
+  --ok: #1f6b45;
+  --again: #8a3a2c;
+  --font-ui: 'Outfit', sans-serif;
+  --font-display: 'Syne', sans-serif;
+  --font-ar: 'Noto Naskh Arabic', serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 1.02rem;
+  line-height: 1.5;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--ink) 2.5%, transparent) 0 1px,
+      transparent 1px 18px
+    ),
+    var(--mist);
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+[lang='ar'] {
+  font-family: var(--font-ar);
+}
