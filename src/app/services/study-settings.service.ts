@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { StudyDirection, StudyItem } from '../models/lesson.model';
 
-const STORAGE_KEY = 'medine.v1.direction';
+const STORAGE_KEY = 'arapca.v1.direction';
 
 @Injectable({ providedIn: 'root' })
 export class StudySettingsService {

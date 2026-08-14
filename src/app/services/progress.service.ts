@@ -28,14 +28,15 @@ export class ProgressService {
   }
 
   reset(lessonId: number, mode: StudyMode): void {
-    localStorage.removeItem(this.key(lessonId, mode));
+    this.remove(this.key(lessonId, mode));
     this.revision.update((n) => n + 1);
   }
 
   resetLesson(lessonId: number): void {
-    this.reset(lessonId, 'flashcard');
-    this.reset(lessonId, 'input');
-    this.reset(lessonId, 'sentences');
+    this.remove(this.key(lessonId, 'flashcard'));
+    this.remove(this.key(lessonId, 'input'));
+    this.remove(this.key(lessonId, 'sentences'));
+    this.revision.update((n) => n + 1);
   }
 
   private save(lessonId: number, mode: StudyMode, learned: Set<string>): void {
@@ -43,7 +44,15 @@ export class ProgressService {
     this.revision.update((n) => n + 1);
   }
 
+  private remove(key: string): void {
+    try {
+      localStorage.removeItem(key);
+    } catch {
+      // Some mobile privacy modes can block storage access.
+    }
+  }
+
   private key(lessonId: number, mode: StudyMode): string {
-    return `medine.v1.learned.${lessonId}.${mode}`;
+    return `arapca.v1.learned.${lessonId}.${mode}`;
   }
 }
