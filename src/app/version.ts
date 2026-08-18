@@ -1,5 +1,5 @@
 /** Bump this string before each publish to invalidate client sessions. */
-export const APP_VERSION = '1.0.0';
+export const APP_VERSION = '1.0.1';
 
 export const STORAGE_PREFIX = 'arapca.';
 export const VERSION_KEY = 'arapca.app.version';
