@@ -137,6 +137,6 @@ export const LESSONS: Lesson[] = [
       { id: '3_s24', arabic: 'الإمام جالس والمدرس واقف', meaning: 'İmam oturuyor, öğretmen ise ayaktadır' },
       { id: '3_s25', arabic: 'القمر بعيد', meaning: 'Ay uzaktır' },
       { id: '3_s26', arabic: 'المنديل نظيف', meaning: 'Mendil temizdir' },
-    ],
+    ], 
   },
 ];
