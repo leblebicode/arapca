@@ -1,0 +1,51 @@
+<main class="page">
+  <header class="brand">
+    <p class="brand-kicker">1. Cilt</p>
+    <h1 class="brand-name">Durûsu'l-Luğati'l-Arabiyye</h1>
+    <p class="brand-line">Bugüne kadar görülen kelimeler.</p>
+  </header>
+
+  <app-home-tabs />
+
+  <label class="search">
+    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="6.25" fill="none" stroke="currentColor" stroke-width="1.6" />
+      <path d="M15.2 15.2 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    </svg>
+    <input
+      type="search"
+      [value]="query()"
+      (input)="onSearch($event)"
+      placeholder="Arapça veya Türkçe ara"
+      dir="auto"
+      autocomplete="off"
+      spellcheck="false"
+    />
+  </label>
+
+  @if (groups().length === 0) {
+    <p class="empty">Eşleşen kelime yok.</p>
+  } @else {
+    <p class="count">{{ matchCount() }} kelime</p>
+
+    <nav class="letters" aria-label="Harfler">
+      @for (group of groups(); track group.letter) {
+        <button type="button" (click)="jumpTo(group.letter)">{{ group.letter }}</button>
+      }
+    </nav>
+
+    @for (group of groups(); track group.letter) {
+      <section class="letter-group" [attr.id]="'harf-' + group.letter">
+        <h2>{{ group.letter }}</h2>
+        <ul class="words">
+          @for (item of group.items; track item.id) {
+            <li>
+              <span class="ar" lang="ar" dir="rtl">{{ item.arabic }}</span>
+              <span class="tr">{{ item.meaning }}</span>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+  }
+</main>

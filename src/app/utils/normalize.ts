@@ -7,10 +7,22 @@ export function answersMatch(expected: string, given: string, expectedIsArabic: 
   return normalizeTurkish(expected) === normalizeTurkish(given);
 }
 
-function normalizeArabic(value: string): string {
+export function normalizeArabic(value: string): string {
   return value.trim().replace(ARABIC_MARKS, '').replace(/\s+/g, '');
 }
 
-function normalizeTurkish(value: string): string {
+export function normalizeTurkish(value: string): string {
   return value.trim().toLocaleLowerCase('tr-TR').replace(/\s+/g, ' ');
+}
+
+export function textMatchesQuery(arabic: string, meaning: string, query: string): boolean {
+  const q = query.trim();
+  if (!q) {
+    return true;
+  }
+
+  const qTr = normalizeTurkish(q);
+  const qAr = normalizeArabic(q);
+
+  return normalizeTurkish(meaning).includes(qTr) || normalizeArabic(arabic).includes(qAr);
 }

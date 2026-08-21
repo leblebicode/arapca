@@ -5,10 +5,11 @@
     <p class="brand-line">Ders seç, çalışmaya başla.</p>
   </header>
 
+  <app-home-tabs />
+
   <nav class="lessons" aria-label="Dersler">
     @for (lesson of lessons; track lesson.id) {
       <a class="lesson" [routerLink]="['/lesson', lesson.id]">
-        <span class="lesson-index">{{ lesson.id }}</span>
         <span class="lesson-title">{{ lesson.title }}</span>
         <span class="lesson-meta"
           >{{ lesson.vocabulary.length }} kelime · {{ lesson.sentences.length }} cümle</span

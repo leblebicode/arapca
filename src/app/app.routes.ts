@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Flashcard } from './pages/flashcard/flashcard';
+import { Glossary } from './pages/glossary/glossary';
 import { InputMode } from './pages/input-mode/input-mode';
 import { LessonList } from './pages/lesson-list/lesson-list';
 import { SentenceMode } from './pages/sentence-mode/sentence-mode';
@@ -8,6 +9,7 @@ import { WordList } from './pages/word-list/word-list';
 
 export const routes: Routes = [
   { path: '', component: LessonList },
+  { path: 'sozluk', component: Glossary },
   { path: 'lesson/:id', component: Study },
   { path: 'lesson/:id/flashcard', component: Flashcard },
   { path: 'lesson/:id/input', component: InputMode },

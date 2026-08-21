@@ -1,5 +1,5 @@
 /** Bump this string before each publish to invalidate client sessions and cached bundles. */
-export const APP_VERSION = '1.0.2';
+export const APP_VERSION = '1.0.3';
 
 export const STORAGE_PREFIX = 'arapca.';
 export const VERSION_KEY = 'arapca.app.version';

@@ -6,7 +6,7 @@
       <h1>{{ lesson.title }}</h1>
       <p>
         {{ lesson.vocabulary.length }} kelime · {{ lesson.sentences.length }} cümle · yönü seç,
-        ardından sekmeden çalışma biçimini seç
+        ardından çalışma biçimini seç
       </p>
     </header>
 
@@ -26,8 +26,6 @@
         Arapça → Türkçe
       </button>
     </div>
-
-    <app-study-tabs [lessonId]="lesson.id" />
 
     <div class="modes" aria-label="Mod özeti">
       <div class="mode-row">

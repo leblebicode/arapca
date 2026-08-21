@@ -2,7 +2,6 @@ import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
-import { StudyTabs } from '../../components/study-tabs/study-tabs';
 import { StudyDirection, StudyMode } from '../../models/lesson.model';
 import { LessonService } from '../../services/lesson.service';
 import { ProgressService } from '../../services/progress.service';
@@ -10,7 +9,7 @@ import { StudySettingsService } from '../../services/study-settings.service';
 
 @Component({
   selector: 'app-study',
-  imports: [RouterLink, StudyTabs],
+  imports: [RouterLink],
   templateUrl: './study.html',
   styleUrl: './study.scss',
 })

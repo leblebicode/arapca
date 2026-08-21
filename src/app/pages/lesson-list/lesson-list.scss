@@ -36,7 +36,7 @@
 
 .lesson {
   display: grid;
-  grid-template-columns: 2.4rem 1fr auto;
+  grid-template-columns: 1fr auto;
   gap: 1rem;
   align-items: baseline;
   padding: 1.05rem 0;
@@ -54,11 +54,6 @@
 .lesson:focus-visible {
   padding-left: 0.4rem;
   color: var(--teal-deep);
-}
-
-.lesson-index {
-  font-variant-numeric: tabular-nums;
-  color: var(--ink-soft);
 }
 
 .lesson-title {
@@ -87,10 +82,10 @@
   }
 
   .lesson {
-    grid-template-columns: 1.6rem 1fr;
+    grid-template-columns: 1fr;
   }
 
   .lesson-meta {
-    grid-column: 2;
+    grid-column: 1;
   }
 }

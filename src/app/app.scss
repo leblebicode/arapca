@@ -23,10 +23,22 @@
 
 .credit p {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
   color: var(--ink-soft);
   font-size: 0.8rem;
   letter-spacing: 0.04em;
   text-align: center;
+}
+
+.credit .logo {
+  width: 1.35rem;
+  height: 1.35rem;
+  object-fit: cover;
+  border-radius: 50%;
+  vertical-align: middle;
 }
 
 .credit .version {
